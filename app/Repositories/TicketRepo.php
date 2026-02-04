@@ -1,4 +1,6 @@
 <?php 
+namespace App\Repositories;
+
 
 use App\Domain\Entity\Ticket as TicketEntity;
 use App\Models\Ticket;

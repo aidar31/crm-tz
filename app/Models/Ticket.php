@@ -15,7 +15,7 @@ class Ticket extends Model implements HasMedia
 
     protected $fillable = ['customer_id', 'topic', 'body', 'status'];
 
-    public function from_entity(TicketEntity $entity): self {
+    public static function from_entity(TicketEntity $entity): self {
         return new self([
             'customer_id' => $entity->customerId,
             'topic' => $entity->topic,
