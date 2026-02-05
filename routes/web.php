@@ -25,10 +25,14 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-Route::middleware(['isAuthenticated'])->group(function () {
+Route::middleware(['isAuthenticated', 'isManager'])->group(function () {
     Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/tickets', [AdminTicketController::class, 'index'])->name('tickets.index');
         Route::get('/tickets/{ticket}', [AdminTicketController::class, 'show'])->name('tickets.show');
         Route::patch('/tickets/{ticket}/status', [AdminTicketController::class, 'updateStatus'])->name('tickets.update-status');
     });
+});
+
+Route::get('/ticket-iframe', function () {
+    return view('iframe.ticket-form');
 });

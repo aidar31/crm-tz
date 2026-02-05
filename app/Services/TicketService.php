@@ -35,9 +35,10 @@ class TicketService
         $customer = $this->customer_repo->findOrCreate($customerEntity);
 
         $ticket = new TicketEntity(
-            customerId: $customer->id,
+            customerId: (string)$customer->id,
             topic: $data["topic"],
             body: $data["body"],
+            status: TicketStatus::New,
         );
 
         return $this->ticket_repo->save($ticket, $uploadedFiles);

@@ -15,13 +15,13 @@ class StoreTicketRequest extends FormRequest {
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
             'topic' => ['required', 'string'],
-            'phone_number' => ['required', 'phone:INTERNATIONAL,KZ,RU'],
+            'phone_number' => ['required', 'string', 'starts_with:+', 'phone:INTERNATIONAL,KZ,RU'],
             'body' => ['required', 'string'],
 
-            'attachments' => ['nullable', 'array', 'max:5'],
-            'attachments.*' => [
+            'files' => ['nullable', 'array', 'max:5'],
+            'files.*' => [
                 'file',
-                'mimes:jpg,jpeg,png,pdf,doc,docx',
+                'mimes:jpg,jpeg,png,pdf,doc,docx,webp',
                 'max:5120'
             ],
         ];

@@ -15,7 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'isAuthenticated' => \App\Http\Middlewares\IsAuthenticated::class,
             'redirectIfAuthenticated' => \App\Http\Middlewares\RedirectIfAuthenticated::class,
+            'isManager' => \App\Http\Middlewares\CheckManagerRole::class,
         ]);
+        $middleware->validateCsrfTokens(except: [
+        'api/tickets', 
+    ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
