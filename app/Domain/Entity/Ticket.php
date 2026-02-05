@@ -31,6 +31,7 @@ final class Ticket
         string $body,
         public private(set) TicketStatus $status = TicketStatus::New,
         public readonly ?string $id = null,
+        public ?Customer $customer = null,
         public array $files = [], // хз незнаю как правильнее, не хотел но тут url адресса на файлы
     ) {
         $this->topic = $topic;

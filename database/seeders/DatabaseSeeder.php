@@ -35,5 +35,17 @@ class DatabaseSeeder extends Seeder
         Customer::factory(10)
         ->has(Ticket::factory()->count(rand(2, 5)))
         ->create();
+
+        $vipCustomer = Customer::factory()->create(['name' => 'VIP Customer']);
+
+        Ticket::factory(5)->create([
+            'customer_id' => $vipCustomer->id,
+            'created_at' => now()->subHours(rand(1, 5)),
+        ]);
+
+        Ticket::factory(10)->create([
+            'customer_id' => $vipCustomer->id,
+            'created_at' => now()->subDays(10),
+        ]);
     }
 }

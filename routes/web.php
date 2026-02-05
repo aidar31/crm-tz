@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\AdminTicketController;
+;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,5 +22,13 @@ Route::prefix('auth')->group(function () {
         Route::middleware(['isAuthenticated'])->group(function () {
             Route::get("/logout", 'logout_view')->name('logout');
         });
+    });
+});
+
+Route::middleware(['isAuthenticated'])->group(function () {
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+        Route::get('/tickets', [AdminTicketController::class, 'index'])->name('tickets.index');
+        Route::get('/tickets/{ticket}', [AdminTicketController::class, 'show'])->name('tickets.show');
+        Route::patch('/tickets/{ticket}/status', [AdminTicketController::class, 'updateStatus'])->name('tickets.update-status');
     });
 });
