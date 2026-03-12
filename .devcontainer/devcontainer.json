@@ -1,0 +1,39 @@
+{
+    "name": "Laravel Sail",
+    "dockerComposeFile": [
+        "../compose.yaml"
+    ],
+    "service": "laravel.test",
+    "workspaceFolder": "/var/www/html",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "amiralizadeh94.laravel-extra-intellisense",
+                "onecentlin.laravel-blade",
+                "shufo.vscode-blade-formatter",
+                "xdebug.php-debug",
+                "mtxr.sqltools",
+                "mtxr.sqltools-driver-mysql"
+            ],
+            "settings": {
+                "php.suggest.basic": false,
+                "editor.formatOnSave": true,
+                "sqltools.connections": [
+                    {
+                        "name": "Sail MySQL",
+                        "driver": "MySQL",
+                        "server": "mysql",
+                        "port": 3306,
+                        "database": "${localEnv:DB_DATABASE}",
+                        "username": "${localEnv:DB_USERNAME}",
+                        "password": "${localEnv:DB_PASSWORD}"
+                    }
+                ]
+            }
+        }
+    },
+    "remoteUser": "sail",
+    "postCreateCommand": "composer install && php artisan key:generate",
+    "forwardPorts": [80, 5173]
+}

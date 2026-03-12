@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTicketRequest;
 use App\Http\Resources\TicketResource;
 use App\Services\TicketService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Routing\Controller;
 use Request;
 
@@ -19,7 +20,7 @@ class TicketController extends Controller {
         return new TicketResource($ticketEntity);
     }
 
-    public function getStatistics(Request $request, TicketService $service) {
+    public function getStatistics(HttpRequest $request, TicketService $service) {
         $stats = $service->getStatistics();
         return response()->json([
             'data' => [

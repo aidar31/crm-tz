@@ -10,13 +10,17 @@ class CustomerRepo
     // TODO: this need refactoring
     public function findOrCreate(CustomerEntity $entity): CustomerEntity
     {
-        $model = Customer::firstOrCreate(
-            ['email' => $entity->email],
-            [
+        $model = Customer::where('email', $entity->email)
+        ->orWhere('phone_number', $entity->phone_number)
+        ->first();
+
+        if ($model) {
+            $model = Customer::create([
+                'email' => $entity->email,
                 'name' => $entity->name,
-                'phone_number' => $entity->phone_number
-            ]
-        );
+                'phone_number' => $entity->phone_number,
+            ]);
+        }
 
         return $model->to_entity();
     }
